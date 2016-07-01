@@ -65,6 +65,7 @@ class ProcessLanguage extends ProcessPageType {
 		// make sure our files fields have CSV support
 		foreach(array('language_files', 'language_files_site') as $fieldName) {
 			$field = $this->wire('fields')->get($fieldName);
+			if(!$field) continue;
 			$extensions = $field->get('extensions'); 
 			if(strpos($extensions, 'csv') === false) {
 				$field->set('extensions', "$extensions csv");
@@ -136,6 +137,7 @@ class ProcessLanguage extends ProcessPageType {
 	
 		$form = $event->object;
 		$language = $this->getPage();
+		if(!$language->id) return;
 		$file = $language->filesManager()->path . '.phrase-index.txt';
 		$inputfield = $this->wire('modules')->get('InputfieldMarkup');
 		$inputfield->label = $this->_('Live Search');
@@ -167,7 +169,7 @@ class ProcessLanguage extends ProcessPageType {
 		}
 		
 		$field = $form->getChildByName('language_files_site');
-		$form->insertBefore($inputfield, $field);
+		if($field) $form->insertBefore($inputfield, $field);
 	}
 
 	/**

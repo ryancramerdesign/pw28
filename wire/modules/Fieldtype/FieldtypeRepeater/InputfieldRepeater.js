@@ -197,6 +197,10 @@ function InputfieldRepeaterInit($this) {
 	
 	var $delete = $("<i class='fa fa-trash InputfieldRepeaterTrash'></i>").css('display', 'block');
 	var $toggle = $("<i class='fa InputfieldRepeaterToggle' data-on='fa-toggle-on' data-off='fa-toggle-off'></i>");
+	var cfg = ProcessWire.config.InputfieldRepeater;
+	
+	$toggle.attr('title', cfg.labels.toggle);
+	$delete.attr('title', cfg.labels.remove);
 	
 	$("input.InputfieldRepeaterDelete", $this).parents('.InputfieldCheckbox').hide();
 	
@@ -369,6 +373,8 @@ $(document).ready(function() {
 		if(typeof source != "undefined") {
 			if(source == 'InputfieldRepeaterItemEdit' || source == 'InputfieldRepeaterItemAdd') {
 				event.stopPropagation();
+				var $r = $(this).find(".InputfieldRepeater");
+				if($r.length) InputfieldRepeaterInit($r);
 				return;
 			}
 		}

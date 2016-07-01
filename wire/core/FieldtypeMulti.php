@@ -40,6 +40,23 @@ abstract class FieldtypeMulti extends Fieldtype {
 	}
 
 	/**
+	 * Return array containing the column name(s) of the primary keys
+	 * 
+	 * @param Field $field
+	 * @return array
+	 * 
+	 */
+	protected function getPrimaryKeyColumns(Field $field) {
+		$schema = $this->getDatabaseSchema($field);
+		$x = explode('(', rtrim($schema['keys']['primary'], ')'));
+		$columns = explode(',', $x[1]);
+		foreach($columns as $k => $col) {
+			$columns[$k] = trim($col);
+		}
+		return $columns; 
+	}
+
+	/**
 	 * Return array with information about what properties and operators can be used with this field
 	 * 
 	 * @param Field $field
@@ -263,6 +280,82 @@ abstract class FieldtypeMulti extends Fieldtype {
 		}
 
 		return true; 
+	}
+
+	/**
+	 * Save just the given rows (or single row) for fields that have a single unique primary key.
+	 * 
+	 * #pw-internal
+	 * 
+	 * @param Page $page
+	 * @param Field $field
+	 * @param WireArray|Wire $value The row value to save, or WireArray containing rows you want to save
+	 * 
+	 */
+	public function ___savePageFieldRows(Page $page, Field $field, $value) {
+		
+		if(!$value instanceof WireArray) {
+			$blankValue = $this->getBlankValue($page, $field);
+			$blankValue->add($value);
+			$value = $blankValue; 
+		}
+
+		$database = $this->wire('database');
+		$table = $database->escapeTable($field->table);
+		
+		$primaryKeys = $this->getPrimaryKeyColumns($field);
+		$primaryKey = $database->escapeCol(reset($primaryKeys));
+		
+		if(count($primaryKeys) !== 1 || $primaryKey == 'pages_id') {
+			throw new WireException("savePageFieldRows may ony be used on Fieldtypes with a single unique primary key");
+		}
+		
+		foreach($this->sleepValue($page, $field, $value) as $item) {
+
+			$keys = array_keys($item);
+			$binds = array();
+			$sqls = array();
+			$id = $item[$primaryKey];
+			
+			foreach($keys as $n => $key) {
+				$key = $database->escapeCol($key);
+				if($key === $primaryKey) continue;
+				$sqls[] = "`$key`=:$key";
+				$binds[":$key"] = $item[$key];
+			}
+			
+			$sql = implode(', ', $sqls);
+			
+			if($id) {
+				$sql = "UPDATE `$table` SET $sql WHERE `$primaryKey`=:primaryKey LIMIT 1";
+			} else {
+				$sql = "INSERT INTO `$table` SET $sql";
+			}
+			
+			$query = $database->prepare($sql);
+			if($id) $query->bindValue(':primaryKey', $id);
+			
+			foreach($binds as $bindKey => $bindValue) {
+				$query->bindValue($bindKey, $bindValue);
+			}
+			
+			$database->execute($query);
+		}
+
+		return true;
+	}
+	
+	public function deletePageFieldRows(Page $page, Field $field, $value) {
+	}
+
+	/**
+	 * Template method: returns database column name having a unique ID for the field, if applicable.
+	 * 
+	 * @return string|null Return null if not appliable, or column name if applicable.
+	 * 
+	 */
+	protected function getColumnHavingUniqueID() {
+		return null;	
 	}
 
 	/**

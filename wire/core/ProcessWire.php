@@ -28,7 +28,7 @@ class ProcessWire extends Wire {
 
 	const versionMajor = 2; 
 	const versionMinor = 8; 
-	const versionRevision = 23; 
+	const versionRevision = 24; 
 	const versionSuffix = 'dev';
 	
 	const indexVersion = 280; // required version for index.php file (represented by PROCESSWIRE define)
