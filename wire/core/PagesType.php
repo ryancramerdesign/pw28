@@ -371,35 +371,6 @@ class PagesType extends Wire implements \IteratorAggregate, \Countable {
 		return $page; 
 	}
 
-	/*
-	public function ___xadd ($name = '', array $values = array(), $throw = false) {
-		
-		if(is_array($name)) {
-			$values = $name;
-			$name = isset($values['name']) ? $values['name'] : '';
-		}
-
-		if(!strlen($name)) {
-			$name = empty($values['title']) ? sprintf($this->_('Untitled %s'), $this->getPageClass()) : $values['title'];
-		}
-
-		$page = parent::___add($name);
-
-		$exceptionMessage = "Unable to add pagestype new using parent '{$page->parent->path}'.";
-
-		if($page instanceof NullPage && $throw) throw new WireException($exceptionMessage);
-
-		// set field values, if provided
-		if(!empty($values)) {
-			unset($values['id'], $values['parent'], $values['template']); // fields that may not be set from this array
-			foreach($values as $key => $value) $page->set($key, $value);
-			$this->save($page);
-		}
-
-		return $page;
-	}
-	*/
-
 	/**
 	 * Make it possible to iterate all pages of this type per the \IteratorAggregate interface.
 	 *
@@ -483,7 +454,10 @@ class PagesType extends Wire implements \IteratorAggregate, \Countable {
 	 * @return array Optional extra data to add to pages save query.
 	 *
 	 */
-	public function ___saveReady(Page $page) { return array(); }
+	public function ___saveReady(Page $page) { 
+		if($page) {}
+		return array(); 
+	}
 
 	/**
 	 * Hook called after a page is successfully saved

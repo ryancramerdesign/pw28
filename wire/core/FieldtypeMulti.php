@@ -263,8 +263,19 @@ abstract class FieldtypeMulti extends Fieldtype {
 				foreach($keys as $key) {
 					$v = isset($value[$key]) ? $value[$key] : null;
 					if(is_null($v)) {
+						// value is NULL, determine how to handle it
 						if(empty($schema)) $schema = $this->getDatabaseSchema($field); 
-						$sql .= isset($schema[$key]) && stripos($schema[$key], ' DEFAULT NULL') ? "NULL, " : "'', ";
+						$useNULL = false;
+						if(isset($schema[$key])) {
+							if(stripos($schema[$key], ' DEFAULT NULL')) {
+								// use the default NULL value
+								$useNULL = true;
+							} else if(stripos($schema[$key], ' AUTO_INCREMENT')) {
+								// potentially a primary key, some SQL modes require NULL (rather than blank) for auto increment
+								$useNULL = true;
+							}
+						}
+						$sql .= $useNULL ? "NULL, " : "'', ";
 					} else {
 						$sql .= "'" . $database->escapeStr("$v") . "', ";
 					}
@@ -424,7 +435,11 @@ abstract class FieldtypeMulti extends Fieldtype {
 				if($col === 'sort') {
 					$desc = strpos($value, '-') === 0 ? '-' : '';
 					$sort = $sanitizer->fieldName(ltrim($value, '-'));
-					if(isset($schema[$sort])) $orderByCols[] = $desc . $sort;
+					if(isset($schema[$sort])) {
+						$orderByCols[] = $desc . $sort;
+					} else if($sort === 'random') {
+						$orderByCols[] = $sort;
+					}
 					
 				} else if($col === 'limit') {
 					$value = (int) $value;
@@ -456,8 +471,13 @@ abstract class FieldtypeMulti extends Fieldtype {
 			foreach($orderByCols as $key => $col) {
 				$desc = strpos($col, '-') === 0 ? ' DESC' : '';
 				$col = $sanitizer->fieldName(ltrim($col, '-'));
-				if(!array_key_exists($col, $schema)) continue;
-				$sorts[$key] = $database->escapeCol($col) . $desc;
+				if($col === 'random') {
+					$sorts = array('RAND()');
+					break;
+				} else {
+					if(!array_key_exists($col, $schema)) continue;
+					$sorts[$key] = $database->escapeCol($col) . $desc;
+				}
 			}
 			$query->orderby = $sorts;
 			$query->data('_orderByCols', $orderByCols); // just in case needed elsewhere
