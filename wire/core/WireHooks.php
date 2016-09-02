@@ -5,7 +5,7 @@
  * 
  * This class is for internal use. You should manipulate hooks from Wire-derived classes instead. 
  *
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  */

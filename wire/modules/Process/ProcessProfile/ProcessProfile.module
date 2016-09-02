@@ -3,7 +3,7 @@
 /**
  * ProcessWire Self Profile
  *
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  * 
@@ -88,6 +88,7 @@ class ProcessProfile extends Process implements ConfigurableModule, WirePageEdit
 			$field = $this->user->fields->getFieldContext($field);
 			/** @var Inputfield $inputfield */
 			$inputfield = $field->getInputfield($this->user);
+			if(!$inputfield) continue;
 			$inputfield->value = $this->user->get($field->name);
 			if($field->name == 'admin_theme' && !$inputfield->value) $inputfield->value = 'AdminThemeDefault';
 			if($field->type instanceof FieldtypeImage && !$this->user->hasPermission('page-edit-images', $this->user)) {

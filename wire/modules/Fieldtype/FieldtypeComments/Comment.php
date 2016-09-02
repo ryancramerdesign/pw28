@@ -5,7 +5,7 @@
  *
  * Class that contains an individual comment.
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * @property int $id

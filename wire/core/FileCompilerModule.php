@@ -8,7 +8,7 @@
  * FileCompiler modules must use the name format: FileCompiler[Name].module
  * For example, FileCompilerTags.module
  *
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  * This file is licensed under the MIT license

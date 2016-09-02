@@ -5,7 +5,7 @@
  *
  * Provides the base interfaces required by modules.
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * #pw-summary Module is the primary PHP interface for module types in ProcessWire. 

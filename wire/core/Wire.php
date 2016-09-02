@@ -16,7 +16,7 @@
  * #pw-body
  * #pw-order-groups common,identification,hooks,notices,changes,hooker
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * #pw-use-constants
@@ -262,6 +262,7 @@ abstract class Wire implements WireTranslatable, WireFuelable, WireTrackable {
 
 		if(isset($options['namespace']) && $options['namespace'] === true) {
 			$className = get_class($this);
+			if(strpos($className, '\\') === false) $className = "\\$className";
 		} else {
 			$className = wireClassName($this, false);
 		}

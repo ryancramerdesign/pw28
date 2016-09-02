@@ -6,7 +6,7 @@
  * Wire Data Access Object, provides reusable capability for loading, saving, creating, deleting, 
  * and finding items of descending class-defined types. 
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * @method WireArray load(WireArray $items, $selectors = null);

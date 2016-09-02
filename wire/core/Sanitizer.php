@@ -11,7 +11,7 @@
  * Modules may also add methods to the Sanitizer as needed i.e. $this->sanitizer->addHook('myMethod', $myClass, 'myMethod'); 
  * See the Wire class definition for more details about the addHook method. 
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  * @link http://processwire.com/api/variables/sanitizer/ Offical $sanitizer API variable Documentation
@@ -1631,7 +1631,7 @@ class Sanitizer extends Wire {
 			'allowBrackets' => false, // allow [bracket] tags?
 			'allow' => array('a', 'strong', 'em', 'code', 's', 'span', 'u', 'small', 'i'),
 			'disallow' => array(),
-			'linkMarkup' => '<a href="{url}" rel="nofollow" target="_blank">{text}</a>',
+			'linkMarkup' => '<a href="{url}" rel="noopener noreferrer nofollow" target="_blank">{text}</a>',
 		);
 
 		if($options === true || (is_int($options) && $options > 0)) $defaults['fullMarkdown'] = $options;

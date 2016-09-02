@@ -6,7 +6,7 @@
  * Provides an interface to the Pages class but specific to 
  * a given page class/type, with predefined parent and template. 
  *
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  * @method Page add($name)

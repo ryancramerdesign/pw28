@@ -5,7 +5,7 @@
  *
  * This module is the front door to all the other language modules and files. 
  *
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * @property int $languagesPageID
@@ -562,6 +562,7 @@ class LanguageSupport extends WireData implements Module, ConfigurableModule {
 		$page = $event->arguments[0];
 		$template = $page ? $page->template : null;
 		$inputfield = $event->return; 
+		if(!$inputfield) return;
 		$translatable = array('label', 'description', 'notes');
 		if($inputfield->attr('placeholder') !== null) $translatable[] = 'placeholder';
 		$languages = $template ? $template->getLanguages() : $this->wire('languages'); 

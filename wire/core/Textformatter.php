@@ -8,7 +8,7 @@
  * #pw-summary A simple module type that provides formatting of text fields. 
  * #pw-body Please see the base `Module` interface for all potential methods that a Textformatter module can have. 
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * This file is licensed under the MIT license

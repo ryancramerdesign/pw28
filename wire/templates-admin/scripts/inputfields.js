@@ -1161,7 +1161,6 @@ function InputfieldIntentions() {
 		var $input = null;
 		
 		$form.submit(function() {
-			
 			if(!$(this).hasClass('nosubmit')) return;
 			if(!$input) return;
 			

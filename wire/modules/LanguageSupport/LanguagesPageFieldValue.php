@@ -3,7 +3,7 @@
 /**
  * Serves as a multi-language value placeholder for field values that contain a value in more than one language. 
  *
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  */

@@ -5,7 +5,7 @@
  *
  * Provides implementation for Page comparison functions.
  *
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  */

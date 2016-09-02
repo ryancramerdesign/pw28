@@ -5,7 +5,7 @@
  *
  * Manages and provides access to all the Template instances
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * #pw-summary Manages and provides access to all the Templates.

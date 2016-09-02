@@ -15,7 +15,7 @@
  * of most other methods provided in this Fieldtype class accounts for most situations already. 
  * #pw-body
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * 
@@ -126,7 +126,7 @@ abstract class Fieldtype extends WireData implements Module {
 	 * 
 	 * @param Page $page Page that the Inputfield will be for
 	 * @param Field $field Field that the Inputfield will be for
-	 * @return Inputfield
+	 * @return Inputfield|null Returns Inputfield or null if not applicable/available.
 	 *
 	 */
 	public function getInputfield(Page $page, Field $field) {

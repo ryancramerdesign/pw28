@@ -6,7 +6,7 @@
  * Saves uploads of single or multiple files, saving them to the destination path.
  * If the destination path does not exist, it will be created. 
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  *
  */

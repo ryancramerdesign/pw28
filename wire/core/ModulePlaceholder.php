@@ -6,7 +6,7 @@
  * Holds the place for a Module until it is included and instantiated.
  * As used by the Modules class. 
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://.processwire.com
  * 
  * @property bool $autoload

@@ -9,7 +9,7 @@
  * 
  * Thanks to @horst for his assistance with several methods in this class.
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  * @method bool|string send($url, $data = array(), $method = 'POST')
@@ -858,15 +858,6 @@ class WireHttp extends Wire {
 				$value = '';
 			}
 			if(!isset($this->responseHeaders[$key])) $this->responseHeaders[$key] = $value;
-			/*
-			if(!isset($this->responseHeaders[$key])) {
-				$this->responseHeaders[$key] = $value;
-			} else if(is_array($this->responseHeaders[$key])) {
-				$this->responseHeaders[$key][] = $value;
-			} else {
-				$this->responseHeaders[$key] = array($this->responseHeaders[$key], $value);
-			}
-			*/
 		}
 	
 		/*

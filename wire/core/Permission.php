@@ -14,7 +14,7 @@
  * @property string $name Name of the permission. 
  * @property string $title Short description of what the permission is for. 
  * 
- * ProcessWire 2.8.x (development), Copyright 2016 by Ryan Cramer
+ * ProcessWire 2.8.x, Copyright 2016 by Ryan Cramer
  * https://processwire.com
  * 
  */
